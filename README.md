@@ -1,0 +1,1 @@
+Pomodoro Timer App was built to complete the portion Free Code Camp's Advanced Front End Development Projects. We were provided Use Cases to fulfill and were allowed to use whichever libraries or APIs to complete this project. 
