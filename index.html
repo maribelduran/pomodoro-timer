@@ -2,19 +2,29 @@
 <head>
  <title>Pomodoro Timer</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="css/style.css">
 </head>
 
 <body>
- <h1>Hello. Let's begin!</h1>
+ <h1>Hello. Let's Focus!</h1>
  <h2 id="timerName"></h2>
  Timer:<h2 id="timer">25</h2>
  <button onclick="controller.startTimer()">start</button>
  <button onclick="controller.stopTimer()">stop</button>
+ <button id="toggle" onclick="controller.toggleTimer()">start</button>
+
+ <div>
+ <button id="reset" onclick="controller.resetTimer()">reset</button>
+</div>
+
+<div>
+</div>
+ <div id="settings">
+ Session Length : <button onclick="controller.decSessionTime()">-</button> <span id="sessionLength">25</span> minutes <button onclick="controller.addSessionTime()">+</button>
+ 
  <br>
- <br>
- Session Length : <button onclick="controller.decSessionTime()">-</button> <span id="sessionLength">25</span> minutes <button onclick="controller.incSessionTime()">+</button>
- <br>
- Break Length is: <button>-</button> <span id="breakLength">5</span> minutes <button>+</button>
+ Break Length is: <button onclick="controller.decbreakTime()">-</button> <span id="breakLength">5</span> minutes <button onclick="controller.addbreakTime()">+</button>
+ </div>
 </body>
 
 
