@@ -1,10 +1,16 @@
+//Thursday 3/23: Added counter for Sessions (Pomodoros) Completed
+//Friday 3/24: Fixed reset button functionality
+//Saturday 3/25: Make code more readable
+//Sunday 3/26:
+//Monday 3/27:
+
 //timer class
 function timer(sec,name){
 	this.seconds = sec;
 	this.name = name;
 	this.isRunning = false;
 	this.intervalID = "";
-	this.addMin = function (){
+  this.addMin = function (){
 		this.seconds += 60;
 	};
 	this.reduceMin = function(){
@@ -19,12 +25,13 @@ var model = {
 	activeTimer: "",
 	sessionTimer: {},
 	breakTimer: {},
+	sessionsCompleted: 0,
 	setSessionTimer: function(min, name){
 		this.sessionTimer = new timer(parseInt(min) * 60, name);
 	},
 	setBreakTimer: function(min, name){
 		this.breakTimer = new timer(parseInt(min) * 60, name);
-	},
+	}, 
 	setActiveTimer: function(timer){
 		this.activeTimer = timer;
 	}
@@ -39,7 +46,6 @@ var controller = {
 		model.setBreakTimer(breakMinuteInput, "Break");
 		model.setActiveTimer(model.sessionTimer);
 	},
-	//Will use toggleTimer when I have a single button that changes between Start to Stop
 	toggleTimer: function(){
 		if (model.activeTimer.isRunning){
 			this.stopTimer();
@@ -47,17 +53,18 @@ var controller = {
 		}
 		else{
 			this.startTimer();
-			document.getElementById("toggle").innerHTML = "stop";
+			document.getElementById("toggle").innerHTML = "pause";
 		}
 	},
 	resetTimer: function(){
 			this.stopTimer();
 			model.sessionTimer.resetTime(25);
 			model.breakTimer.resetTime(5);
+			model.setActiveTimer(model.sessionTimer);
 			view.displayTimeLeft(model.activeTimer.seconds);
-			document.getElementById("sessionLength").textContent = 25;
-			document.getElementById("breakLength").textContent = 5;
-
+			view.displayTimerName(model.activeTimer.name);
+			view.displaySettings(25,5);
+			view.updateSessionCounter(0);
 	},
 	startTimer: function(){
 		if (!model.activeTimer.isRunning){
@@ -69,29 +76,31 @@ var controller = {
 				if (model.activeTimer.seconds > 0){
 					model.activeTimer.seconds --;
 					view.displayTimeLeft(model.activeTimer.seconds);
-				}else{ //Reset and stop active timer. Then start the other timer.
-					if (model.activeTimer.name == "Session"){
-						var sessionLength = document.getElementById("sessionLength").textContent;
-						model.activeTimer.resetTime(sessionLength);
-						this.stopTimer();
-						model.setactiveTimer(model.breakTimer);
-						this.startTimer();
-					}
-					else if (model.activeTimer.name == "Break"){
-						var breakLength = document.getElementById("breakLength").textContent;
-						model.activeTimer.resetTime(breakLength);
-						this.stopTimer();
-						model.setactiveTimer(model.sessionTimer);
-						this.startTimer();
-					}
+				}else{
+					this.switchTimers();
 				}	
 				}.bind(this),1000);
 		}
 	},
+	switchTimers: function(){ //Reset and stop active timer. Then start the other timer.
+			if (model.activeTimer.name == "Session"){
+						model.sessionsCompleted += 1;
+						view.updateSessionCounter(model.sessionsCompleted);
+						var sessionLength = document.getElementById("sessionLength").textContent;
+						model.activeTimer.resetTime(sessionLength);
+						this.stopTimer();
+						model.setActiveTimer(model.breakTimer);
+			}else if (model.activeTimer.name == "Break"){
+						var breakLength = document.getElementById("breakLength").textContent;
+						model.activeTimer.resetTime(breakLength);
+						this.stopTimer();
+						model.setActiveTimer(model.sessionTimer);
+			}
+			this.startTimer();
+	},	
 	stopTimer: function(){
 		clearInterval(model.activeTimer.intervalID);
 		model.activeTimer.isRunning = false;
-
 	},
 	decSessionTime: function(){
 		if (!model.activeTimer.isRunning && model.sessionTimer.seconds > 60){
@@ -100,7 +109,7 @@ var controller = {
 		}
 	},
 	addSessionTime: function(){
-		if (!model.activeTimer.isRunning && model.sessionTimer.seconds > 60){
+		if (!model.activeTimer.isRunning && model.sessionTimer.seconds >= 60){
 			model.sessionTimer.addMin();
 			view.displaySessionTime(model.sessionTimer.seconds);
 		}
@@ -112,7 +121,7 @@ var controller = {
 		}
 	},
 	addbreakTime: function(){
-		if (!model.activeTimer.isRunning && model.breakTimer.seconds > 60){
+		if (!model.activeTimer.isRunning && model.breakTimer.seconds >= 60){
 			model.breakTimer.addMin();
 			view.displayBreakTime(model.breakTimer.seconds);
 		}
@@ -127,10 +136,15 @@ var view = {
 	displayTimerName: function(name){
 		var timerName = document.getElementById("timerName");
 		timerName.innerHTML = name;
-
 	},
 	hideSettings: function(){
 		document.getElementById("settings").style.display = "none";
+	},
+	displaySettings: function(sessionLen, breakLen){
+		document.getElementById("sessionLength").textContent = sessionLen;
+		document.getElementById("breakLength").textContent = breakLen;
+		document.getElementById("settings").style.display = "block";
+		document.getElementById("settingsButton").style.visibility = "visible";
 	},
 	displaySessionTime: function(seconds){
 		var m = Math.floor(seconds/ 60);
@@ -147,10 +161,12 @@ var view = {
 			m = (m.toString().length == 1) ? "0" + m: m;
 			s = (s.toString().length == 1) ? "0" + s: s;
 			return (m + ":" + s);
+	},
+	updateSessionCounter: function(count){
+		document.getElementById("counter").textContent = count;
 	}
 };
 
 controller.createTimers();
-
 //https://www.phpied.com/3-ways-to-define-a-javascript-class/
 //https://scotch.io/tutorials/better-javascript-with-es6-pt-ii-a-deep-dive-into-classes
