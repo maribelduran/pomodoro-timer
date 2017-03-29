@@ -9,12 +9,16 @@
  <h1>Hello. Let's Focus!</h1>
  <h2 id="timerName"></h2>
  Timer:<h2 id="timer">25</h2>
+ <!--
  <button onclick="controller.startTimer()">start</button>
  <button onclick="controller.stopTimer()">stop</button>
+ -->
  <button id="toggle" onclick="controller.toggleTimer()">start</button>
 
  <div>
+ <button id="stop" onclick="">stop</button>
  <button id="reset" onclick="controller.resetTimer()">reset</button>
+ <button id="settingsButton" onclick="">settings</button>
 </div>
 
 <div>
@@ -25,6 +29,9 @@
  <br>
  Break Length is: <button onclick="controller.decbreakTime()">-</button> <span id="breakLength">5</span> minutes <button onclick="controller.addbreakTime()">+</button>
  </div>
+
+<h3 id="sessionsCompleted">Sessions Completed: <span id="counter">0</span></h3>
+
 </body>
 
 
