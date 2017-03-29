@@ -1,9 +1,3 @@
-//Thursday 3/23: Added counter for Sessions (Pomodoros) Completed
-//Friday 3/24: Fixed reset button functionality
-//Saturday 3/25: Make code more readable
-//Sunday 3/26:
-//Monday 3/27:
-
 //timer class
 function timer(sec,name){
 	this.seconds = sec;
