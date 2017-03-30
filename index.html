@@ -1,40 +1,79 @@
+<!DOCTYPE html>
+
 <html>
 <head>
  <title>Pomodoro Timer</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="css/style.css">
+  <link rel='stylesheet prefetch' href='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css'>
 </head>
 
 <body>
- <h1>Hello. Let's Focus!</h1>
- <h2 id="timerName"></h2>
- Timer:<h2 id="timer">25</h2>
- <!--
- <button onclick="controller.startTimer()">start</button>
- <button onclick="controller.stopTimer()">stop</button>
- -->
- <button id="toggle" onclick="controller.toggleTimer()">start</button>
+  <div class="container-fluid">
+		<div class="row nav">
+			<button id="reset" onclick="controller.resetTimer()">reset</button>
+			<div id="settings">
+			 Session Length : <button onclick="controller.decSessionTime()">-</button> <span id="sessionLength">25</span> minutes <button onclick="controller.addSessionTime()">+</button>
+			 
+			 <br>
+				Break Length is: <button onclick="controller.decbreakTime()">-</button> <span id="breakLength">5</span> minutes <button onclick="controller.addbreakTime()">+</button>
+			</div>
+			<button id="settingsButton" onclick="">settings</button>
+		</div> <!-- row nav -->
 
- <div>
- <button id="stop" onclick="">stop</button>
- <button id="reset" onclick="controller.resetTimer()">reset</button>
- <button id="settingsButton" onclick="">settings</button>
-</div>
+		<div id="content">
+			<h1 id="timerName">Hello. Let's Focus!</h1>
 
-<div>
-</div>
- <div id="settings">
- Session Length : <button onclick="controller.decSessionTime()">-</button> <span id="sessionLength">25</span> minutes <button onclick="controller.addSessionTime()">+</button>
- 
- <br>
- Break Length is: <button onclick="controller.decbreakTime()">-</button> <span id="breakLength">5</span> minutes <button onclick="controller.addbreakTime()">+</button>
- </div>
+			<div class="row">
+	 			Timer:<h2 id="timer">25</h2>
+			 	<!--
+			 	<button onclick="controller.startTimer()">start</button>
+				 <button onclick="controller.stopTimer()">stop</button>
+				 -->
+				<button id="toggle" onclick="controller.toggleTimer()">start</button>
+				<!--<button id="stop" onclick="">stop</button-->
+			</div> <!--row-->
+			
+			<h3 id="sessionsCompleted">Sessions Completed: <span id="counter">0</span></h3>
+			
+			<div id="sessions" class="row">
+				<hr>
+				<div class="col-xs-1">
+					<p>.</p>
+				</div>
+				<div class="col-xs-1">
+					<p>.</p>
+				</div>
+				<div class="col-xs-1">
+					<p>.</p>
+				</div>
+				<div class="col-xs-1">
+					<p>.</p>
+				</div>
+				<div class="col-xs-1">
+					<p>.</p>
+				</div>
+				<div class="col-xs-1">
+					<p>.</p>
+				</div>
+				<div class="col-xs-1">
+					<p>.</p>
+				</div>
+				<div class="col-xs-1">
+					<p>.</p>
+				</div>
 
-<h3 id="sessionsCompleted">Sessions Completed: <span id="counter">0</span></h3>
+			</div> <!--row-->
+			
+		</div> <!--content-->
+
+	</div> <!--container-fluid-->
 
 </body>
 
-
+<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js'></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js'></script>
 <script src="js/index.js"></script>
+
 
 </html>
