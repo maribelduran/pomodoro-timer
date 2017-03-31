@@ -1,19 +1,23 @@
-//timer class
-function timer(sec,name){
+//Timer class
+function Timer(sec,name){
 	this.seconds = sec;
 	this.name = name;
 	this.isRunning = false;
 	this.intervalID = "";
-  this.addMin = function (){
-		this.seconds += 60;
-	};
-	this.reduceMin = function(){
-		this.seconds -= 60;
-	},
-	this.resetTime = function(minutes){
-		this.seconds = minutes * 60;
-	}
 }
+//add methods to the object's prototype instead of on the constructor.
+Timer.prototype.addMin = function(){
+	this.seconds += 60;
+}
+
+Timer.prototype.reduceMin = function(){
+	this.seconds -= 60;
+}
+
+Timer.prototype.resetTime =function(minutes){
+		this.seconds = minutes * 60;
+}
+
 //model
 var model = {
 	activeTimer: "",
@@ -21,10 +25,10 @@ var model = {
 	breakTimer: {},
 	sessionsCompleted: 0,
 	setSessionTimer: function(min, name){
-		this.sessionTimer = new timer(parseInt(min) * 60, name);
+		this.sessionTimer = new Timer(parseInt(min) * 60, name);
 	},
 	setBreakTimer: function(min, name){
-		this.breakTimer = new timer(parseInt(min) * 60, name);
+		this.breakTimer = new Timer(parseInt(min) * 60, name);
 	}, 
 	setActiveTimer: function(timer){
 		this.activeTimer = timer;
