@@ -126,7 +126,6 @@ var controller = {
 	},
 	toggleSettings: function(){
 		var settings = document.getElementById("settings");
-
 		if (settings.style.visibility === "visible"){
 			view.hideSettings();
 		}

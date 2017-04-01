@@ -1,28 +1,38 @@
-/*TODO:;
-85: Tuesday 3/28: Styling Pomodoro App 
-86: Wednesday 3/29: design/css?
-*/
-
-/*
-#settingsButton{
-	visibility: hidden;
-}
-*/
 body{
 	height: 100%;
+	margin: 0;
+	
 }
 
 .container-fluid{
+	background-color: #FC6E6E;
   	min-height:100%;
-	position:relative;
+	 /* to keep footer at bottom of page*/
+  	position:relative;
+  	padding-bottom: 200px;
+	
 }
 
 #content{
-  	width: 50%;
+  	width: 60%;
   	margin: auto;
     text-align: center;
 }
 
+#settings{
+	font-size: 10px;
+
+}
+
+.col-xs-6{
+	background-color: yellow;
+}
+
+.col-xs-3{
+	background-color: orange;
+}
+
+#settings
 
 
 
