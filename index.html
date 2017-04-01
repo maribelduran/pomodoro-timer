@@ -11,15 +11,22 @@
 
 <body>
   <div class="container-fluid">
-		<div class="row nav">
-			<button id="reset" onclick="controller.resetTimer()">reset</button>
-			<div id="settings">
-			 	Session Length : <button onclick="controller.decSessionTime()">-</button> <span id="sessionLength">25</span> minutes <button onclick="controller.addSessionTime()">+</button>
-			 	<br>
-				Break Length is: <button onclick="controller.decbreakTime()">-</button> <span id="breakLength">5</span> minutes <button onclick="controller.addbreakTime()">+</button>
+		<div id="nav" class="row">
+			<div class="col-xs-6">
+				<button id="reset" onclick="controller.resetTimer()">reset</button>
 			</div>
-			<button id="settingsButton" onclick="">settings</button>
+			<div class="col-xs-5 text-right">
+				<div id="settings" style="visibility: visible">
+			 		Session Length : <button onclick="controller.decSessionTime()">-</button> <span id="sessionLength">25</span> minutes <button onclick="controller.addSessionTime()">+</button>
+			 		<br>
+					Break Length is: <button onclick="controller.decbreakTime()">-</button> <span id="breakLength">5</span> minutes <button onclick="controller.addbreakTime()">+</button>
+				</div>
+			</div>
+			<div class="col-xs-1 text-right">
+				<button id="settingsButton" onclick="controller.toggleSettings()">settings</button>
+			</div>
 		</div> <!-- row nav -->
+
 
 		<div id="content">
 			<h1 id="timerName">Hello. Let's Focus!</h1>
@@ -37,20 +44,20 @@
 			
 			<div id="sessions" class="row">
 				<hr>
-				<div class="col-sm-6">
+				<div class="col-xs-6">
 					<div class="row">
-						<div class="col-sm-3">.</div>
-						<div class="col-sm-3">.</div>
-						<div class="col-sm-3">.</div>
-						<div class="col-sm-3">.</div>
+						<div class="col-xs-3">.</div>
+						<div class="col-xs-3">.</div>
+						<div class="col-xs-3">.</div>
+						<div class="col-xs-3">.</div>
 					</div> 
 				</div> <!-- col-md-6 -->
-				<div class="col-sm-6">
+				<div class="col-xs-6">
 					<div class="row">
-						<div class="col-sm-3">.</div>
-						<div class="col-sm-3">.</div>
-						<div class="col-sm-3">.</div>
-						<div class="col-sm-3">.</div>
+						<div class="col-xs-3">.</div>
+						<div class="col-xs-3">.</div>
+						<div class="col-xs-3">.</div>
+						<div class="col-xs-3">.</div>
 					</div> 
 				</div> <!-- col-md-6 -->
 			</div> <!--row-->

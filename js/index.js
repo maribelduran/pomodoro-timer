@@ -5,15 +5,13 @@ function Timer(sec,name){
 	this.isRunning = false;
 	this.intervalID = "";
 }
-//add methods to the object's prototype instead of on the constructor.
+
 Timer.prototype.addMin = function(){
 	this.seconds += 60;
 }
-
 Timer.prototype.reduceMin = function(){
 	this.seconds -= 60;
 }
-
 Timer.prototype.resetTime =function(minutes){
 		this.seconds = minutes * 60;
 }
@@ -47,7 +45,6 @@ var controller = {
 	toggleTimer: function(){
 		if (model.activeTimer.isRunning){
 			this.stopTimer();
-			document.getElementById("toggle").innerHTML = "start";
 		}
 		else{
 			this.startTimer();
@@ -80,7 +77,8 @@ var controller = {
 				}.bind(this),1000);
 		}
 	},
-	switchTimers: function(){ //Reset and stop active timer. Then start the other timer.
+	//Reset and stop active timer. Then start the other timer.
+	switchTimers: function(){ 
 			if (model.activeTimer.name == "Session"){
 						model.sessionsCompleted += 1;
 						view.updateSessionCounter(model.sessionsCompleted);
@@ -99,6 +97,8 @@ var controller = {
 	stopTimer: function(){
 		clearInterval(model.activeTimer.intervalID);
 		model.activeTimer.isRunning = false;
+		//create a view method
+		document.getElementById("toggle").innerHTML = "start";
 	},
 	decSessionTime: function(){
 		if (!model.activeTimer.isRunning && model.sessionTimer.seconds > 60){
@@ -123,6 +123,18 @@ var controller = {
 			model.breakTimer.addMin();
 			view.displayBreakTime(model.breakTimer.seconds);
 		}
+	},
+	toggleSettings: function(){
+		var settings = document.getElementById("settings");
+
+		if (settings.style.visibility === "visible"){
+			view.hideSettings();
+		}
+		else{
+			var sessionMinuteInput = document.getElementById("sessionLength").textContent;
+			var breakMinuteInput = document.getElementById("breakLength").textContent;
+			view.displaySettings(sessionMinuteInput,breakMinuteInput);
+		}
 	}
 };
 
@@ -136,13 +148,12 @@ var view = {
 		timerName.innerHTML = name;
 	},
 	hideSettings: function(){
-		document.getElementById("settings").style.display = "none";
+		document.getElementById("settings").style.visibility = "hidden";
 	},
 	displaySettings: function(sessionLen, breakLen){
 		document.getElementById("sessionLength").textContent = sessionLen;
 		document.getElementById("breakLength").textContent = breakLen;
-		document.getElementById("settings").style.display = "block";
-		document.getElementById("settingsButton").style.visibility = "visible";
+		document.getElementById("settings").style.visibility = "visible";
 	},
 	displaySessionTime: function(seconds){
 		var m = Math.floor(seconds/ 60);
