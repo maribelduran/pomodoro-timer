@@ -1,16 +1,22 @@
 body{
 	height: 100%;
 	margin: 0;
-	
+	background-color: #FC6E6E;
+	/* to keep footer at bottom of page*/
+  	margin:0;
+	padding:0;
+  	height:100%;
 }
 
 .container-fluid{
-	background-color: #FC6E6E;
-  	min-height:100%;
-	 /* to keep footer at bottom of page*/
-  	position:relative;
-  	padding-bottom: 200px;
+	background-color: white;
+  	/*min-height:100%;*/
 	
+}
+.nav{
+  margin-top: 0px;
+  padding: 10px 0px 10px 0px;
+ /*background-color: #337ab7;*/
 }
 
 #content{
@@ -21,18 +27,28 @@ body{
 
 #settings{
 	font-size: 10px;
-
 }
 
-.col-xs-6{
-	background-color: yellow;
+#settingsButton{
+	outline: none;
+}
+
+.fa-cogs, .fa-undo{
+	color: #FC6E6E;
+}
+
+
+
+.row{
+	/*background-color: yellow;*/
 }
 
 .col-xs-3{
-	background-color: orange;
+	/*background-color: orange;*/
 }
 
-#settings
 
-
+/*
+Inspired by https://codepen.io/pbweb/full/yJGmgr/ and https://dribbble.com/shots/2405612-Minimalist-Pomodoro-Timer
+*/
 

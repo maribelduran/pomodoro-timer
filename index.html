@@ -7,23 +7,18 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="css/style.css">
   <link rel='stylesheet prefetch' href='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css'>
+ <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css"/>
 </head>
 
 <body>
   <div class="container-fluid">
-		<div id="nav" class="row">
+		<div class="row nav">
 			<div class="col-xs-6">
-				<button id="reset" onclick="controller.resetTimer()">reset</button>
+				<button id="reset" class="btn btn-default btn-sm" onclick="controller.resetTimer()"><i class="fa fa-undo fa-2x" aria-hidden="true"></i></button>
 			</div>
-			<div class="col-xs-5 text-right">
-				<div id="settings" style="visibility: visible">
-			 		Session Length : <button onclick="controller.decSessionTime()">-</button> <span id="sessionLength">25</span> minutes <button onclick="controller.addSessionTime()">+</button>
-			 		<br>
-					Break Length is: <button onclick="controller.decbreakTime()">-</button> <span id="breakLength">5</span> minutes <button onclick="controller.addbreakTime()">+</button>
-				</div>
-			</div>
-			<div class="col-xs-1 text-right">
-				<button id="settingsButton" onclick="controller.toggleSettings()">settings</button>
+
+			<div class="col-xs-6 text-right">
+				<button id="settingsButton" class="btn btn-default btn-sm" onclick="controller.toggleSettings()"><i class="fa fa-cogs fa-2x" aria-hidden="true"></i></button>
 			</div>
 		</div> <!-- row nav -->
 
@@ -63,6 +58,14 @@
 			</div> <!--row-->
 		</div> <!--content-->
 	</div> <!--container-fluid-->
+
+<div class="col-xs-5 text-right" id="settings" style="visibility: visible">
+			Session Length : <button onclick="controller.decSessionTime()">-</button> <span id="sessionLength">25</span> minutes <button onclick="controller.addSessionTime()">+</button>
+			<br>
+			Break Length is: <button onclick="controller.decbreakTime()">-</button> <span id="breakLength">5</span> minutes <button onclick="controller.addbreakTime()">+</button>
+	</div>
+
+	
 
 </body>
 
