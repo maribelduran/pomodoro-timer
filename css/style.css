@@ -47,6 +47,12 @@ body{
 	/*background-color: orange;*/
 }
 
+.well{
+	width: 60%;
+  	margin: auto;
+  	text-align: center;
+}
+
 
 /*
 Inspired by https://codepen.io/pbweb/full/yJGmgr/ and https://dribbble.com/shots/2405612-Minimalist-Pomodoro-Timer
