@@ -7,7 +7,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="css/style.css">
   <link rel='stylesheet prefetch' href='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css'>
- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css"/>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css"/>
+  <!--Use to update to project to codepen
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/9.7.2/css/bootstrap-slider.min.css"/>
+  -->
+  <link rel="stylesheet" href="css/bootstrap-slider.min.css"/>
 </head>
 
 <body>
@@ -28,10 +32,6 @@
 
 			<div class="row">
 	 			Timer:<h2 id="timer">25</h2>
-			 	<!--
-			 	<button onclick="controller.startTimer()">start</button>
-				 <button onclick="controller.stopTimer()">stop</button>
-				 -->
 				<button id="toggle" onclick="controller.toggleTimer()">start</button>
 			</div> <!--row-->
 			
@@ -57,13 +57,37 @@
 				</div> <!-- col-md-6 -->
 			</div> <!--row-->
 		</div> <!--content-->
-	</div> <!--container-fluid-->
 
-<div class="col-xs-5 text-right" id="settings" style="visibility: visible">
-			Session Length : <button onclick="controller.decSessionTime()">-</button> <span id="sessionLength">25</span> minutes <button onclick="controller.addSessionTime()">+</button>
+
+
+	 
+		 <div class="well" id="settings" style="visibility: visible">
+		 	<h5>Settings</h5>
+			<hr>	
+		 	
+		 <form>
+		 	<h6>Session Length</h6>
+
+		 	<input id="ex1" data-slider-id='ex1Slider' type="text" data-slider-min="1" data-slider-max="60" data-slider-step="1" data-slider-value="25"/>
+
+
+			<input class="" type="range" id="sessionLen" value="25" min="1" max="60"><span id="sessionLength">25</span> minutes 
+			<h6>Break Length</h6>
+			<input class="" type="range" id="breakLen" value="5" min="1" max="30"><span id="breakLength">5</span> minutes 
+			<br>
+			
+
+			<button>Cancel</button>
+			<input type="submit">
+		</form>
+		</div>
+
+			 <button onclick="controller.decSessionTime()">-</button> <span id="sessionLength">25</span> minutes <button onclick="controller.addSessionTime()">+</button>
 			<br>
 			Break Length is: <button onclick="controller.decbreakTime()">-</button> <span id="breakLength">5</span> minutes <button onclick="controller.addbreakTime()">+</button>
-	</div>
+	
+	</div> <!--container-fluid-->
+
 
 	
 
@@ -71,6 +95,10 @@
 
 <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js'></script>
 <script src='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js'></script>
+<!--Use to update project to codepen
+<script src='https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/9.7.2/bootstrap-slider.min.js'></script>
+-->
+<script src='js/bootstrap-slider.min.js'></script>
 <script src="js/index.js"></script>
 
 </html>

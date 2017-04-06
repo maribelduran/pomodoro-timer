@@ -10,10 +10,12 @@ Timer.prototype.addMin = function(){
 	this.seconds += 60;
 }
 Timer.prototype.reduceMin = function(){
+	//console.log(this.seconds);
 	this.seconds -= 60;
 }
 Timer.prototype.resetTime =function(minutes){
 		this.seconds = minutes * 60;
+
 }
 
 //model
@@ -100,10 +102,10 @@ var controller = {
 		//create a view method
 		document.getElementById("toggle").innerHTML = "start";
 	},
-	decSessionTime: function(){
+	decSessionTime: function(value){
 		if (!model.activeTimer.isRunning && model.sessionTimer.seconds > 60){
-			model.sessionTimer.reduceMin();
-			view.displaySessionTime(model.sessionTimer.seconds);
+			//model.sessionTimer.reduceMin();
+			view.displaySessionTime(value);
 		}
 	},
 	addSessionTime: function(){
@@ -154,10 +156,10 @@ var view = {
 		document.getElementById("breakLength").textContent = breakLen;
 		document.getElementById("settings").style.visibility = "visible";
 	},
-	displaySessionTime: function(seconds){
-		var m = Math.floor(seconds/ 60);
-		document.getElementById("sessionLength").textContent = m;
-		document.getElementById("timer").textContent = m;
+	displaySessionTime: function(time){
+		//var m = Math.floor(seconds/ 60);
+		document.getElementById("sessionLength").textContent = time;
+		//document.getElementById("timer").textContent = m;
 	},
 	displayBreakTime: function(seconds){
 		var m = Math.floor(seconds/ 60);
@@ -175,6 +177,15 @@ var view = {
 	}
 };
 
+//https://github.com/seiyria/bootstrap-slider
 controller.createTimers();
+// With JQuery
+$('#ex1').slider({
+	formatter: function(value) {
+		controller.decSessionTime(value);
+		return value;
+		//return 'Current value: ' + value;
+	}
+});
 //https://www.phpied.com/3-ways-to-define-a-javascript-class/
 //https://scotch.io/tutorials/better-javascript-with-es6-pt-ii-a-deep-dive-into-classes
