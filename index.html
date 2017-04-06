@@ -1,4 +1,3 @@
-<!--Created 8 even bootsrap columns to show sessions completed -->
 <!DOCTYPE html>
 
 <html>
@@ -58,34 +57,24 @@
 			</div> <!--row-->
 		</div> <!--content-->
 
-
-
 	 
-		 <div class="well" id="settings" style="visibility: visible">
+		 <div class="well" id="settings" style="visibility: hidden">
 		 	<h5>Settings</h5>
 			<hr>	
 		 	
-		 <form>
 		 	<h6>Session Length</h6>
-
-		 	<input id="ex1" data-slider-id='ex1Slider' type="text" data-slider-min="1" data-slider-max="60" data-slider-step="1" data-slider-value="25"/>
-
-
-			<input class="" type="range" id="sessionLen" value="25" min="1" max="60"><span id="sessionLength">25</span> minutes 
-			<h6>Break Length</h6>
-			<input class="" type="range" id="breakLen" value="5" min="1" max="30"><span id="breakLength">5</span> minutes 
+		 	<input id="sessionInput" data-slider-id='sessionInputSlider' type="text" data-slider-min="1" data-slider-max="60" data-slider-step="1" data-slider-value="25"/>
+		 	<span id="sessionLength">25</span> minute(s) 
+		 	
+		 	<h6>Break Length</h6>
+		 	<input id="breakInput" data-slider-id='breakInputSlider' type="text" data-slider-min="1" data-slider-max="30" data-slider-step="1" data-slider-value="5"/>
+		 	<span id="breakLength">5</span> minute(s)
 			<br>
-			
+			<button onclick="controller.undoSettingUpdates()">Cancel</button>
+			<button onclick="controller.updateSettings()">Save Changes</button>
+		</div> 
 
-			<button>Cancel</button>
-			<input type="submit">
-		</form>
-		</div>
-
-			 <button onclick="controller.decSessionTime()">-</button> <span id="sessionLength">25</span> minutes <button onclick="controller.addSessionTime()">+</button>
-			<br>
-			Break Length is: <button onclick="controller.decbreakTime()">-</button> <span id="breakLength">5</span> minutes <button onclick="controller.addbreakTime()">+</button>
-	
+		
 	</div> <!--container-fluid-->
 
 
