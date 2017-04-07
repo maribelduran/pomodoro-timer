@@ -25,35 +25,17 @@ body{
     text-align: center;
 }
 
-#settings{
-	font-size: 10px;
+#toggleTimer{
+	background-color: transparent;
+	border-width: 0;
 }
 
-#settingsButton{
-}
-
-.fa-cogs, .fa-undo{
+.fa-cogs, .fa-undo, .fa-play, .fa-pause{
 	color: #FC6E6E;
 }
 
 .modal-content{
 	text-align: center;
-}
-
-
-
-.row{
-	/*background-color: yellow;*/
-}
-
-.col-xs-3{
-	/*background-color: orange;*/
-}
-
-.well{
-	width: 60%;
-  	margin: auto;
-  	text-align: center;
 }
 
 #sessionInputSlider, #breakInputSlider{
@@ -68,8 +50,6 @@ body{
 	background-color: #FC6E6E !important;
 }
 
-
 /*
 Inspired by https://codepen.io/pbweb/full/yJGmgr/ and https://dribbble.com/shots/2405612-Minimalist-Pomodoro-Timer
 */
-

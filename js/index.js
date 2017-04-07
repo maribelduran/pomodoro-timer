@@ -46,7 +46,7 @@ var controller = {
 		}
 		else{
 			this.startTimer();
-			document.getElementById("toggle").innerHTML = "pause";
+			view.updateToggleIcon("start");
 		}
 	},
 	resetTimer: function(){
@@ -93,8 +93,7 @@ var controller = {
 	stopTimer: function(){
 		clearInterval(model.activeTimer.intervalID);
 		model.activeTimer.isRunning = false;
-		//create a view method
-		document.getElementById("toggle").innerHTML = "start";
+		view.updateToggleIcon("pause");
 	},
 	updateSessionLength: function(value){
 		view.displaySessionLength(value);
@@ -122,6 +121,16 @@ var view = {
 	displayActiveTimer: function(name, seconds){
 		document.getElementById("timerName").innerHTML = name;
 		document.getElementById("timer").innerHTML  = this.secondsToMs(seconds);
+	},
+	updateToggleIcon: function(status){
+		var toggleIconClasses = document.getElementById("toggleIcon").classList;
+		if (status== "pause"){
+			toggleIconClasses.remove("fa-pause");
+			toggleIconClasses.add('fa-play');
+		}else{
+			toggleIconClasses.remove("fa-play");
+			toggleIconClasses.add('fa-pause');
+		}
 	},
 	hideSettings: function(){
 		document.getElementById("settings").style.visibility = "hidden";
