@@ -30,11 +30,14 @@ body{
 }
 
 #settingsButton{
-	outline: none;
 }
 
 .fa-cogs, .fa-undo{
 	color: #FC6E6E;
+}
+
+.modal-content{
+	text-align: center;
 }
 
 
@@ -51,6 +54,18 @@ body{
 	width: 60%;
   	margin: auto;
   	text-align: center;
+}
+
+#sessionInputSlider, #breakInputSlider{
+	margin-right: 10px !important;
+}
+
+#sessionInputSlider .slider-selection,#breakInputSlider .slider-selection {
+	background: #FC6E6E;
+}
+
+.slider-handle{
+	background-color: #FC6E6E !important;
 }
 
 
