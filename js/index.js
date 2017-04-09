@@ -4,16 +4,21 @@ const BREAK_TIME = 5;
 //Timer class
 function Timer(sec,name){
 	this.seconds = sec;
+	this.secondsLeft = sec;
+	this.timeElapsed = 0;
 	this.name = name;
 	this.isRunning = false;
 	this.intervalID = "";
 }
-
-Timer.prototype.updateTime = function(minutes){
-	this.seconds = parseInt(minutes) * 60;
+//Called whenev second changes inside the setInterval function
+Timer.prototype.updateTimeLeft = function(changeInSec){
+	this.secondsLeft += changeInSec
+	this.timeElapsed = (this.seconds - this.secondsLeft)/this.seconds;
 }
+//Called whenev sessionLength and breakLength settings are changed or reset button is clicked
 Timer.prototype.resetTime =function(minutes){
-		this.seconds = minutes * 60;
+		this.seconds = this.secondsLeft = (minutes * 60);
+		this.timeElapsed = 0;
 }
 
 //model
@@ -41,6 +46,7 @@ var controller = {
 		model.setActiveTimer(model.sessionTimer);
 	},
 	toggleTimer: function(){
+		//(model.activeTimer.isRunning) ? this.stopTimer() : this.startTimer(); 
 		if (model.activeTimer.isRunning){
 			this.stopTimer();
 		}
@@ -53,21 +59,24 @@ var controller = {
 			model.sessionTimer.resetTime(SESSION_TIME);
 			model.breakTimer.resetTime(BREAK_TIME);
 			model.setActiveTimer(model.sessionTimer);
-			view.displayActiveTimer(model.activeTimer.name, model.activeTimer.seconds);
+			view.displayActiveTimer(model.activeTimer.name, model.activeTimer.secondsLeft);
 			view.updateSettings(SESSION_TIME, BREAK_TIME);
 			model.sessionsCompleted = 0;
 			view.updateSessionCounter(0);
 	},
 	startTimer: function(){
 		if (!model.activeTimer.isRunning){
-			view.displayActiveTimer(model.activeTimer.name, model.activeTimer.seconds);
+			view.displayActiveTimer(model.activeTimer.name, model.activeTimer.secondsLeft);
 			model.activeTimer.isRunning = true;
 			view.updateToggleIcon("start");
-			circle.animate(1);
+			circle.set(model.activeTimer.timeElapsed);
 			model.activeTimer.intervalID =  setInterval(function(){
-				if (model.activeTimer.seconds > 0){
-					model.activeTimer.seconds --;
-					view.displayActiveTimer(model.activeTimer.name, model.activeTimer.seconds);
+				if (model.activeTimer.secondsLeft > 0){
+					//model.activeTimer.secondsLeft --;
+					model.activeTimer.updateTimeLeft(-1);
+					view.displayActiveTimer(model.activeTimer.name, model.activeTimer.secondsLeft);
+					circle.set(model.activeTimer.timeElapsed);
+
 				}else{
 					this.switchTimers();
 				}	
@@ -104,17 +113,14 @@ var controller = {
 		view.displayBreakLength(value);
 	},
 	undoSettingUpdates: function(){
-		//how can I save the original sessionLength
-		var currentSessionTime = view.secondsToMs(model.sessionTimer.seconds).split(":")[0];
-		var currentbreakTime = view.secondsToMs(model.breakTimer.seconds).split(":")[0];
-		view.updateSettings(currentSessionTime, currentbreakTime);
+		view.updateSettings(Math.floor(model.sessionTimer.seconds/60), Math.floor(model.breakTimer.seconds/60));
 	},
 	updateSettings: function(){
 		this.stopTimer();
 		var sessionLength = document.getElementById("sessionLength").textContent;
 		var breakLength = document.getElementById("breakLength").textContent;
-		model.sessionTimer.updateTime(sessionLength);
-		model.breakTimer.updateTime(breakLength);
+		model.sessionTimer.resetTime(sessionLength);
+		model.breakTimer.resetTime(breakLength);
 		view.displayActiveTimer(model.activeTimer.name, model.activeTimer.seconds);
 	}
 };
@@ -138,6 +144,8 @@ var view = {
 		document.getElementById("settings").style.visibility = "hidden";
 	},
 	updateSettings: function(sessionLen, breakLen){
+		//sessionLen = view.secondsToMs(sessionLen).split(":")[0];
+		//breakLen = view.secondsToMs(breakLen).split(":")[0];
 		sesionSlider.setValue(sessionLen, true);
 		breakSlider.setValue(breakLen, true);
 	},
@@ -182,7 +190,7 @@ var circle = new ProgressBar.Circle('#progressBarContainer', {
 	color: '#FC6E6E',
 	strokeWidth: 4,
 	duration: 60000,
-	easing: 'easeInOut',
+	easing: 'easeIn',
 	trailColor: '#EEE',
 	trailWidth: 4
   });
