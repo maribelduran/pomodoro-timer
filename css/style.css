@@ -2,16 +2,16 @@ body{
 	height: 100%;
 	margin: 0;
 	background-color: #FC6E6E;
+	font-family: Helvetica, sans-serif;
 	/* to keep footer at bottom of page*/
   	margin:0;
-	padding:0;
+		padding:0;
   	height:100%;
 }
 
 .container-fluid{
 	background-color: white;
   	/*min-height:100%;*/
-	
 }
 .nav{
   margin-top: 0px;
@@ -20,16 +20,45 @@ body{
 }
 
 #content{
-  	width: 60%;
+  	height: 260px;
+  	width: 260px;
   	margin: auto;
     text-align: center;
 }
 
-#toggleTimer{
+#progressBarContainer{
+	height: inherit;
+	width: inherit;
+	margin: auto;
+	position: absolute;
 	background-color: transparent;
-	border-width: 0;
+	z-index: 0;
 }
 
+.progress > svg {
+	height: 100%;
+ }
+
+ #timer{
+ 	position: relative;
+ 	margin: auto;
+ 	font-size: 40px;
+ 	margin-top: 25%;
+ }
+
+#toggleTimer{
+	background-color: transparent;
+	position: relative;
+	border-width: 0;
+	z-index: 1;
+}
+#sessions{
+	margin-top:100px;
+	/*border-width: thin;
+	border-style: solid;
+	box-sizing: border-box;
+	*/
+}
 .fa-cogs, .fa-undo, .fa-play, .fa-pause{
 	color: #FC6E6E;
 }
@@ -49,7 +78,4 @@ body{
 .slider-handle{
 	background-color: #FC6E6E !important;
 }
-
-/*
-Inspired by https://codepen.io/pbweb/full/yJGmgr/ and https://dribbble.com/shots/2405612-Minimalist-Pomodoro-Timer
-*/
+/*Inspired by https://codepen.io/pbweb/full/yJGmgr/ and https://dribbble.com/shots/2405612-Minimalist-Pomodoro-Timer */

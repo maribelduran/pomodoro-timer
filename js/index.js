@@ -46,7 +46,6 @@ var controller = {
 		}
 		else{
 			this.startTimer();
-			view.updateToggleIcon("start");
 		}
 	},
 	resetTimer: function(){
@@ -63,6 +62,8 @@ var controller = {
 		if (!model.activeTimer.isRunning){
 			view.displayActiveTimer(model.activeTimer.name, model.activeTimer.seconds);
 			model.activeTimer.isRunning = true;
+			view.updateToggleIcon("start");
+			circle.animate(1);
 			model.activeTimer.intervalID =  setInterval(function(){
 				if (model.activeTimer.seconds > 0){
 					model.activeTimer.seconds --;
@@ -93,6 +94,7 @@ var controller = {
 	stopTimer: function(){
 		clearInterval(model.activeTimer.intervalID);
 		model.activeTimer.isRunning = false;
+		circle.stop();
 		view.updateToggleIcon("pause");
 	},
 	updateSessionLength: function(value){
@@ -140,7 +142,6 @@ var view = {
 		breakSlider.setValue(breakLen, true);
 	},
 	displaySessionLength: function(minutes){
-		console.log("hello");
 		document.getElementById("sessionLength").textContent = minutes;
 	},
 	displayBreakLength: function(minutes){
@@ -177,6 +178,12 @@ breakSlider.on("slideStop", function(sliderValue) {
 	controller.updateBreakLength(sliderValue);
 });
 
-//https://github.com/seiyria/bootstrap-slider
-//https://www.phpied.com/3-ways-to-define-a-javascript-class/
-//https://scotch.io/tutorials/better-javascript-with-es6-pt-ii-a-deep-dive-into-classes
+var circle = new ProgressBar.Circle('#progressBarContainer', {
+	color: '#FC6E6E',
+	strokeWidth: 4,
+	duration: 60000,
+	easing: 'easeInOut',
+	trailColor: '#EEE',
+	trailWidth: 4
+  });
+//https://kimmobrunfeldt.github.io/progressbar.js/
