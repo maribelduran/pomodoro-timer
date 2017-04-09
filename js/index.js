@@ -60,6 +60,7 @@ var controller = {
 			model.breakTimer.resetTime(BREAK_TIME);
 			model.setActiveTimer(model.sessionTimer);
 			view.displayActiveTimer(model.activeTimer.name, model.activeTimer.secondsLeft);
+			view.updateProgressBar(model.activeTimer.timeElapsed);
 			view.updateSettings(SESSION_TIME, BREAK_TIME);
 			model.sessionsCompleted = 0;
 			view.updateSessionCounter(0);
@@ -72,11 +73,9 @@ var controller = {
 			circle.set(model.activeTimer.timeElapsed);
 			model.activeTimer.intervalID =  setInterval(function(){
 				if (model.activeTimer.secondsLeft > 0){
-					//model.activeTimer.secondsLeft --;
 					model.activeTimer.updateTimeLeft(-1);
 					view.displayActiveTimer(model.activeTimer.name, model.activeTimer.secondsLeft);
-					circle.set(model.activeTimer.timeElapsed);
-
+					view.updateProgressBar(model.activeTimer.timeElapsed);
 				}else{
 					this.switchTimers();
 				}	
@@ -103,7 +102,7 @@ var controller = {
 	stopTimer: function(){
 		clearInterval(model.activeTimer.intervalID);
 		model.activeTimer.isRunning = false;
-		circle.stop();
+		//circle.stop();
 		view.updateToggleIcon("pause");
 	},
 	updateSessionLength: function(value){
@@ -122,6 +121,7 @@ var controller = {
 		model.sessionTimer.resetTime(sessionLength);
 		model.breakTimer.resetTime(breakLength);
 		view.displayActiveTimer(model.activeTimer.name, model.activeTimer.seconds);
+		view.updateProgressBar(model.activeTimer.timeElapsed);
 	}
 };
 
@@ -129,10 +129,14 @@ var view = {
 	displayActiveTimer: function(name, seconds){
 		document.getElementById("timerName").innerHTML = name;
 		document.getElementById("timer").innerHTML  = this.secondsToMs(seconds);
+
+	},
+	updateProgressBar: function(timeElapsed){
+		circle.set(timeElapsed);
 	},
 	updateToggleIcon: function(status){
 		var toggleIconClasses = document.getElementById("toggleIcon").classList;
-		if (status== "pause"){
+		if (status == "pause"){
 			toggleIconClasses.remove("fa-pause");
 			toggleIconClasses.add('fa-play');
 		}else{
@@ -144,8 +148,6 @@ var view = {
 		document.getElementById("settings").style.visibility = "hidden";
 	},
 	updateSettings: function(sessionLen, breakLen){
-		//sessionLen = view.secondsToMs(sessionLen).split(":")[0];
-		//breakLen = view.secondsToMs(breakLen).split(":")[0];
 		sesionSlider.setValue(sessionLen, true);
 		breakSlider.setValue(breakLen, true);
 	},
@@ -190,8 +192,9 @@ var circle = new ProgressBar.Circle('#progressBarContainer', {
 	color: '#FC6E6E',
 	strokeWidth: 4,
 	duration: 60000,
-	easing: 'easeIn',
 	trailColor: '#EEE',
 	trailWidth: 4
   });
+
+//circle.animate(1);
 //https://kimmobrunfeldt.github.io/progressbar.js/
