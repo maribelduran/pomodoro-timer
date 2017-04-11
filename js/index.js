@@ -1,5 +1,6 @@
 const SESSION_TIME = 25;
 const BREAK_TIME = 5;
+const MAX_SESSIONS = 8;
 
 //Timer class
 function Timer(sec,name){
@@ -10,12 +11,12 @@ function Timer(sec,name){
 	this.isRunning = false;
 	this.intervalID = "";
 }
-//Called whenev second changes inside the setInterval function
+//Called when second changes inside the setInterval function
 Timer.prototype.updateTimeLeft = function(changeInSec){
 	this.secondsLeft += changeInSec
 	this.timeElapsed = (this.seconds - this.secondsLeft)/this.seconds;
 }
-//Called whenev sessionLength and breakLength settings are changed or reset button is clicked
+//Called when sessionLength and breakLength settings are changed or reset button is clicked
 Timer.prototype.resetTime =function(minutes){
 		this.seconds = this.secondsLeft = (minutes * 60);
 		this.timeElapsed = 0;
@@ -70,7 +71,7 @@ var controller = {
 			view.displayActiveTimer(model.activeTimer.name, model.activeTimer.secondsLeft);
 			model.activeTimer.isRunning = true;
 			view.updateToggleIcon("start");
-			circle.set(model.activeTimer.timeElapsed);
+			view.updateProgressBar(model.activeTimer.timeElapsed);
 			model.activeTimer.intervalID =  setInterval(function(){
 				if (model.activeTimer.secondsLeft > 0){
 					model.activeTimer.updateTimeLeft(-1);
@@ -102,7 +103,6 @@ var controller = {
 	stopTimer: function(){
 		clearInterval(model.activeTimer.intervalID);
 		model.activeTimer.isRunning = false;
-		//circle.stop();
 		view.updateToggleIcon("pause");
 	},
 	updateSessionLength: function(value){
@@ -191,8 +191,8 @@ breakSlider.on("slideStop", function(sliderValue) {
 var circle = new ProgressBar.Circle('#progressBarContainer', {
 	color: '#FC6E6E',
 	strokeWidth: 4,
-	duration: 60000,
-	trailColor: '#EEE',
+	//duration: (2 * 60000),
+	trailColor: '#D2D3D7',
 	trailWidth: 4
   });
 
