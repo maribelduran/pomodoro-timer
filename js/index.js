@@ -126,6 +126,16 @@ var controller = {
 };
 
 var view = {
+	circleIndicator: {
+		0: "session0",
+		1: "session1",
+		2: "session2",
+		3: "session3",
+		4: "session4",
+		5: "session5",
+		6: "session6",
+		7: "session7"
+	},
 	displayActiveTimer: function(name, seconds){
 		document.getElementById("timerName").innerHTML = name;
 		document.getElementById("timer").innerHTML  = this.secondsToMs(seconds);
@@ -165,11 +175,15 @@ var view = {
 			return (m + ":" + s);
 	},
 	updateSessionCounter: function(count){
+		//if count = 0, then we want to remove completed class from all the cirlces
 		document.getElementById("counter").textContent = count;
+		var circleClasses = document.getElementById(this.circleIndicator[count-1]).classList;
+		circleClasses.add("completed");
 	}
 };
 
 controller.createTimers();
+//view.createEventListeners();
 
 var sesionSlider = new Slider("#sessionInput");
 sesionSlider.on("slide", function(sliderValue) {
@@ -196,5 +210,4 @@ var circle = new ProgressBar.Circle('#progressBarContainer', {
 	trailWidth: 4
   });
 
-//circle.animate(1);
 //https://kimmobrunfeldt.github.io/progressbar.js/

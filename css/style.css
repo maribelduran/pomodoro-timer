@@ -95,9 +95,10 @@ circle{
 	fill:#D2D3D7;
 }
 
-#session1{
-	fill: #FC6E6E;
+.completed{
+	fill: #FC6E6E !important;
 }
+
 
 /*Inspired by http://www.cssreset.com/demos/layouts/how-to-keep-footer-at-bottom-of-page-with-css/ */
 #footer {
