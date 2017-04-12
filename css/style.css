@@ -40,7 +40,6 @@ button::-moz-focus-inner {
   text-align: center;
 	color: #344050;
   padding-bottom:200px; /* Height of the footer element */
-  overflow: hidden;
 }
 
 #progressBarContainer{
@@ -61,7 +60,6 @@ button::-moz-focus-inner {
 #toggleTimer{
 	background-color: transparent;
 	position: relative;
-	border-width: 0;
 	z-index: 1;
 }
 #sessions{
@@ -84,19 +82,9 @@ button::-moz-focus-inner {
 	background: #FC6E6E;
 }
 
-.slider-handle{
-	background-color: #FC6E6E !important;
-
-}
-
-.sessIndicators{
+.sessIndicators > svg{
 	height: 40px;
 	width: 40px;
-}
-
-.sessIndicators > svg{
-	height: 100%;
-	display: block;
 	margin-left: -15px;
 }
 
