@@ -86,7 +86,8 @@ button::-moz-focus-inner {
 	height: 40px;
 	width: 40px;
 	margin-left: -15px;
-	background-color: blue;
+	display: block;
+	
 }
 
 circle{
