@@ -67,7 +67,7 @@ var controller = {
 			view.updateSessionCounter(0);
 	},
 	startTimer: function(){
-		if (!model.activeTimer.isRunning){
+		if (!model.activeTimer.isRunning && (model.sessionsCompleted < MAX_SESSIONS)){
 			view.displayActiveTimer(model.activeTimer.name, model.activeTimer.secondsLeft);
 			model.activeTimer.isRunning = true;
 			view.updateToggleIcon("start");
@@ -175,10 +175,16 @@ var view = {
 			return (m + ":" + s);
 	},
 	updateSessionCounter: function(count){
-		//if count = 0, then we want to remove completed class from all the cirlces
 		document.getElementById("counter").textContent = count;
-		var circleClasses = document.getElementById(this.circleIndicator[count-1]).classList;
-		circleClasses.add("completed");
+
+		if(count === 0){
+			for (var id in this.circleIndicator){
+				document.getElementById(this.circleIndicator[id]).classList.remove("completed");
+			}
+		}else{
+			var circleClasses = document.getElementById(this.circleIndicator[count-1]).classList;
+			circleClasses.add("completed");
+		}
 	}
 };
 
