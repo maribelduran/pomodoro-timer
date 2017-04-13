@@ -1,6 +1,6 @@
 html,
 body{
-	font-family: Helvetica, sans-serif;
+	font-family: 'Roboto', sans-serif;
 	/* to keep footer at bottom of page*/
 	margin:0;
 	padding:0;
@@ -11,7 +11,7 @@ body{
 	 /* to keep footer at bottom of page*/
 	position:relative;
 	min-height:100%;
-	padding-bottom:100px; /* Height of the footer element */
+	padding-bottom:140px; /* Height of the footer element */
 }
 
 .nav{
@@ -36,10 +36,11 @@ button::-moz-focus-inner {
 
 #content{
 	height: 260px;
-  width: 260px;
-  margin: auto;
-  text-align: center;
+	width: 260px;
+	margin: auto;
+	text-align: center;
 	color: #344050;
+	font-weight: bold !important;
 }
 
 #progressBarContainer{
@@ -86,12 +87,10 @@ button::-moz-focus-inner {
 	margin-bottom: -5%;
 }
 
-
 .sessIndicators > svg{
 	height: 40px;
 	width: 40px;
 	margin-left: -15px;
-
 	display: block;
 }
 
