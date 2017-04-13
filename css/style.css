@@ -39,7 +39,7 @@ button::-moz-focus-inner {
   margin: auto;
   text-align: center;
 	color: #344050;
-  padding-bottom:200px; /* Height of the footer element */
+  padding-bottom:300px; /* Height of the footer element */
 }
 
 #progressBarContainer{
@@ -77,6 +77,7 @@ button::-moz-focus-inner {
 #sessionInputSlider, #breakInputSlider{
 	margin-right: 10px !important;
 }
+
 
 #sessionInputSlider .slider-selection,#breakInputSlider .slider-selection {
 	background: #FC6E6E;
@@ -118,8 +119,12 @@ circle{
  	color: white !important;
  }
 
-@media only screen and (min-width: 768px) {
-  #content{
-   
-  }
+@media only screen and (max-width: 550px) {
+  .slider-track{
+	height: 12px !important;
+}
+.slider-handle{
+	height: 24px !important;
+	width: 24px !important;
+}
 }
