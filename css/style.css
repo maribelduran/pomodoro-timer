@@ -121,10 +121,10 @@ circle{
 
 @media only screen and (max-width: 550px) {
   .slider-track{
-	height: 12px !important;
+	height: 14px !important;
 }
 .slider-handle{
-	height: 24px !important;
-	width: 24px !important;
+	height: 26px !important;
+	width: 26px !important;
 }
 }
