@@ -1,4 +1,4 @@
-const SESSION_TIME = 25;
+const SESSION_TIME = 10;
 const BREAK_TIME = 5;
 const MAX_SESSIONS = 8;
 
