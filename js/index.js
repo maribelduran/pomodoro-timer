@@ -185,11 +185,28 @@ var view = {
 			var circleClasses = document.getElementById(this.circleIndicator[count-1]).classList;
 			circleClasses.add("completed");
 		}
-	}
+	},
+	setUpEventListeners: function(){
+		var resetBtn = document.getElementById("reset");
+  	var cancelBtn = document.getElementById("modal-cancel");
+  	var saveChangesBtn = document.getElementById("modal-save");
+  	
+  	resetBtn.addEventListener("click", function(){
+   		controller.resetTimer();
+    });
+
+    cancelBtn.addEventListener("click", function(){
+   		controller.undoSettingUpdates();
+    });
+
+    saveChangesBtn.addEventListener("click", function(){
+   		controller.updateSettings();
+    });
+  }
 };
 
 controller.createTimers();
-//view.createEventListeners();
+view.setUpEventListeners();
 
 var sesionSlider = new Slider("#sessionInput");
 sesionSlider.on("slide", function(sliderValue) {

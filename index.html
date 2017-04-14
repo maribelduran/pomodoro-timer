@@ -31,7 +31,7 @@
   <div class="container-fluid">
 		<div class="row nav">
 			<div class="col-xs-6">
-				<button id="reset" class="btn btn-default btn-sm" onclick="controller.resetTimer()"><i class="fa fa-undo fa-2x" aria-hidden="true"></i></button>
+				<button id="reset" class="btn btn-default btn-sm"><i class="fa fa-undo fa-2x" aria-hidden="true"></i></button>
 			</div>
 			<div class="col-xs-6 text-right">
 			<!-- Button trigger modal -->
@@ -66,8 +66,8 @@
 	      	</div>
 	      </div>
 	      <div class="modal-footer">
-	        <button type="button" class="btn btn-default" onclick="controller.undoSettingUpdates()" data-dismiss="modal">Cancel</button>
-	        <button type="button" class="btn btn-primary" onclick="controller.updateSettings()" data-dismiss="modal">Save changes</button>
+	        <button id="modal-cancel" type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+	        <button id="modal-save" type="button" class="btn btn-primary" data-dismiss="modal">Save changes</button>
 	      </div>
 	    </div>
 	  </div>
