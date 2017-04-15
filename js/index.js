@@ -190,7 +190,8 @@ var view = {
 		var resetBtn = document.getElementById("reset");
   	var cancelBtn = document.getElementById("modal-cancel");
   	var saveChangesBtn = document.getElementById("modal-save");
-  	
+  	var toggleBtn = document.getElementById("toggleTimer");
+  	  	
   	resetBtn.addEventListener("click", function(){
    		controller.resetTimer();
     });
@@ -201,6 +202,10 @@ var view = {
 
     saveChangesBtn.addEventListener("click", function(){
    		controller.updateSettings();
+    });
+    
+    toggleBtn.addEventListener("click", function(){
+   		controller.toggleTimer();
     });
   }
 };
