@@ -128,6 +128,12 @@ var controller = {
 var view = {
 	sesionSlider: new Slider("#sessionInput"),
 	breakSlider: new Slider("#breakInput"),
+	circle: new ProgressBar.Circle('#progressBarContainer',{
+		color: '#FC6E6E',
+		strokeWidth: 4,
+		trailColor: '#D2D3D7',
+		trailWidth: 4
+  }),
 	circleIndicator: {
 		0: "session0",
 		1: "session1",
@@ -144,7 +150,7 @@ var view = {
 
 	},
 	updateProgressBar: function(timeElapsed){
-		circle.set(timeElapsed);
+		this.circle.set(timeElapsed);
 	},
 	updateToggleIcon: function(status){
 		var toggleIconClasses = document.getElementById("toggleIcon").classList;
@@ -230,13 +236,3 @@ var view = {
 
 controller.createTimers();
 view.setUpEventListeners();
-
-
-var circle = new ProgressBar.Circle('#progressBarContainer', {
-	color: '#FC6E6E',
-	strokeWidth: 4,
-	//duration: (2 * 60000),
-	trailColor: '#D2D3D7',
-	trailWidth: 4
-  });
-//https://kimmobrunfeldt.github.io/progressbar.js/
