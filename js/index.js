@@ -126,6 +126,8 @@ var controller = {
 };
 
 var view = {
+	sesionSlider: new Slider("#sessionInput"),
+	breakSlider: new Slider("#breakInput"),
 	circleIndicator: {
 		0: "session0",
 		1: "session1",
@@ -158,8 +160,8 @@ var view = {
 		document.getElementById("settings").style.visibility = "hidden";
 	},
 	updateSettings: function(sessionLen, breakLen){
-		sesionSlider.setValue(sessionLen, true);
-		breakSlider.setValue(breakLen, true);
+		this.sesionSlider.setValue(sessionLen, true);
+		this.breakSlider.setValue(breakLen, true);
 	},
 	displaySessionLength: function(minutes){
 		document.getElementById("sessionLength").textContent = minutes;
@@ -191,7 +193,7 @@ var view = {
   	var cancelBtn = document.getElementById("modal-cancel");
   	var saveChangesBtn = document.getElementById("modal-save");
   	var toggleBtn = document.getElementById("toggleTimer");
-  	  	
+
   	resetBtn.addEventListener("click", function(){
    		controller.resetTimer();
     });
@@ -207,28 +209,28 @@ var view = {
     toggleBtn.addEventListener("click", function(){
    		controller.toggleTimer();
     });
+    
+		this.sesionSlider.on("slide", function(sliderValue){
+			controller.updateSessionLength(sliderValue);
+		});
+
+		this.sesionSlider.on("slideStop", function(sliderValue){
+			controller.updateSessionLength(sliderValue);
+			});
+
+		this.breakSlider.on("slide", function(sliderValue){
+			controller.updateBreakLength(sliderValue);
+		});
+
+		this.breakSlider.on("slideStop", function(sliderValue){
+			controller.updateBreakLength(sliderValue);
+		});
   }
 };
 
 controller.createTimers();
 view.setUpEventListeners();
 
-var sesionSlider = new Slider("#sessionInput");
-sesionSlider.on("slide", function(sliderValue) {
-	controller.updateSessionLength(sliderValue);
-});
-sesionSlider.on("slideStop", function(sliderValue) {
-	controller.updateSessionLength(sliderValue);
-});
-
-var breakSlider = new Slider("#breakInput");
-breakSlider.on("slide", function(sliderValue) {
-	controller.updateBreakLength(sliderValue);
-});
-
-breakSlider.on("slideStop", function(sliderValue) {
-	controller.updateBreakLength(sliderValue);
-});
 
 var circle = new ProgressBar.Circle('#progressBarContainer', {
 	color: '#FC6E6E',
@@ -237,5 +239,4 @@ var circle = new ProgressBar.Circle('#progressBarContainer', {
 	trailColor: '#D2D3D7',
 	trailWidth: 4
   });
-
 //https://kimmobrunfeldt.github.io/progressbar.js/
