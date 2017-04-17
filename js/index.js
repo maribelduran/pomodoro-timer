@@ -47,13 +47,7 @@ var controller = {
 		model.setActiveTimer(model.sessionTimer);
 	},
 	toggleTimer: function(){
-		//(model.activeTimer.isRunning) ? this.stopTimer() : this.startTimer(); 
-		if (model.activeTimer.isRunning){
-			this.stopTimer();
-		}
-		else{
-			this.startTimer();
-		}
+		(model.activeTimer.isRunning) ? this.stopTimer() : this.startTimer(); 
 	},
 	resetTimer: function(){
 			this.stopTimer();
