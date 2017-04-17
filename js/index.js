@@ -11,7 +11,7 @@ function Timer(sec,name){
 	this.isRunning = false;
 	this.intervalID = "";
 }
-//Called when second changes inside the setInterval function
+//Called when time changes
 Timer.prototype.updateTimeLeft = function(changeInSec){
 	this.secondsLeft += changeInSec
 	this.timeElapsed = (this.seconds - this.secondsLeft)/this.seconds;
@@ -54,8 +54,7 @@ var controller = {
 			model.sessionTimer.resetTime(SESSION_TIME);
 			model.breakTimer.resetTime(BREAK_TIME);
 			model.setActiveTimer(model.sessionTimer);
-			view.displayActiveTimer(model.activeTimer.name, model.activeTimer.secondsLeft);
-			view.updateProgressBar(model.activeTimer.timeElapsed);
+			view.displayActiveTimer(model.activeTimer.name, model.activeTimer.secondsLeft, model.activeTimer.timeElapsed);
 			view.updateSettings(SESSION_TIME, BREAK_TIME);
 			model.sessionsCompleted = 0;
 			view.updateSessionCounter(0);
@@ -69,8 +68,7 @@ var controller = {
 			model.activeTimer.intervalID =  setInterval(function(){
 				if (model.activeTimer.secondsLeft > 0){
 					model.activeTimer.updateTimeLeft(-1);
-					view.displayActiveTimer(model.activeTimer.name, model.activeTimer.secondsLeft);
-					view.updateProgressBar(model.activeTimer.timeElapsed);
+					view.displayActiveTimer(model.activeTimer.name, model.activeTimer.secondsLeft, model.activeTimer.timeElapsed);
 				}else{
 					this.switchTimers();
 				}	
@@ -114,8 +112,7 @@ var controller = {
 		var breakLength = document.getElementById("breakLength").textContent;
 		model.sessionTimer.resetTime(sessionLength);
 		model.breakTimer.resetTime(breakLength);
-		view.displayActiveTimer(model.activeTimer.name, model.activeTimer.seconds);
-		view.updateProgressBar(model.activeTimer.timeElapsed);
+		view.displayActiveTimer(model.activeTimer.name, model.activeTimer.seconds, model.activeTimer.timeElapsed);
 	}
 };
 
@@ -138,10 +135,10 @@ var view = {
 		6: "session6",
 		7: "session7"
 	},
-	displayActiveTimer: function(name, seconds){
+	displayActiveTimer: function(name, secondsLeft, timeElapsed){
 		document.getElementById("timerName").innerHTML = name;
-		document.getElementById("timer").innerHTML  = this.secondsToMs(seconds);
-
+		document.getElementById("timer").innerHTML  = this.secondsToMs(secondsLeft);
+		this.updateProgressBar(timeElapsed);
 	},
 	updateProgressBar: function(timeElapsed){
 		this.circle.set(timeElapsed);
