@@ -146,15 +146,12 @@ var view = {
 	updateToggleIcon: function(status){
 		var toggleIconClasses = document.getElementById("toggleIcon").classList;
 		if (status == "pause"){
-			toggleIconClasses.remove("fa-pause");
+		  toggleIconClasses.remove("fa-pause");
 			toggleIconClasses.add('fa-play');
 		}else{
 			toggleIconClasses.remove("fa-play");
 			toggleIconClasses.add('fa-pause');
 		}
-	},
-	hideSettings: function(){
-		document.getElementById("settings").style.visibility = "hidden";
 	},
 	updateSettings: function(sessionLen, breakLen){
 		this.sesionSlider.setValue(sessionLen, true);
