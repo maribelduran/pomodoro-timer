@@ -45,6 +45,7 @@ var controller = {
 		model.setSessionTimer(SESSION_TIME, "Session");
 		model.setBreakTimer(BREAK_TIME, "Break");
 		model.setActiveTimer(model.sessionTimer);
+		view.displaySessionIndicators(MAX_SESSIONS);
 	},
 	toggleTimer: function(){
 		(model.activeTimer.isRunning) ? this.stopTimer() : this.startTimer(); 
@@ -61,10 +62,9 @@ var controller = {
 	},
 	startTimer: function(){
 		if (!model.activeTimer.isRunning && (model.sessionsCompleted < MAX_SESSIONS)){
-			view.displayActiveTimer(model.activeTimer.name, model.activeTimer.secondsLeft);
+			view.displayActiveTimer(model.activeTimer.name, model.activeTimer.secondsLeft, model.activeTimer.timeElapsed);
 			model.activeTimer.isRunning = true;
 			view.updateToggleIcon("start");
-			view.updateProgressBar(model.activeTimer.timeElapsed);
 			model.activeTimer.intervalID =  setInterval(function(){
 				if (model.activeTimer.secondsLeft > 0){
 					model.activeTimer.updateTimeLeft(-1);
@@ -169,6 +169,48 @@ var view = {
 			m = (m.toString().length == 1) ? "0" + m: m;
 			s = (s.toString().length == 1) ? "0" + s: s;
 			return (m + ":" + s);
+	},
+	displaySessionIndicators: function(sessions){		
+		var left_well = document.getElementsByClassName("left-well");
+		var right_well = document.getElementsByClassName("right-well");
+
+		//create a boostrap row and append to left-well
+		var row = document.createElement("div");
+		row.className = "row";
+		left_well[0].appendChild(row);
+
+		//create a boostrap row and append to right-well
+		var row2 = document.createElement("div");
+		row2.className = "row";
+		right_well[0].appendChild(row2);
+
+		for (var i=0; i<sessions; i++){
+			//create circle element
+			var circle = document.createElementNS("http://www.w3.org/2000/svg","circle");
+			circle.id = this.circleIndicator[i];
+			circle.setAttributeNS(null,"cx", "20");
+			circle.setAttributeNS(null,"cy", "20");
+			circle.setAttributeNS(null,"r", "8");
+			circle.setAttributeNS(null,"fill", "#D2D3D7");
+
+			//append circle to svg element
+			var svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+			svg.appendChild(circle);
+
+			//create a boostrap column of size xs-3 and append svg
+			var col_xs_3 = document.createElement("div");
+			col_xs_3.className = "col-xs-3";
+			col_xs_3.classList.add("sessIndicators");
+			col_xs_3.appendChild(svg);
+
+			//attach the elements created to left-well 
+			if (i<4){
+				row.appendChild(col_xs_3);
+				//attach the elements created to right-well 
+			}else{
+			row2.appendChild(col_xs_3);
+			}
+		}
 	},
 	updateSessionCounter: function(count){
 		document.getElementById("counter").textContent = count;

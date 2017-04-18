@@ -94,13 +94,6 @@ button::-moz-focus-inner {
 	display: block;
 }
 
-circle{
-	cx: 20;
-	cy: 20;
-	r: 8;
-	fill:#D2D3D7;
-}
-
 .completed{
 	fill: #FC6E6E !important;
 }
@@ -119,16 +112,16 @@ circle{
   color: white;
  }
 
- a{
- 	color: white !important;
- }
+a{
+	color: white !important;
+}
 
 @media only screen and (max-width: 550px) {
   .slider-track{
 	height: 14px !important;
-}
-.slider-handle{
-	height: 26px !important;
-	width: 26px !important;
-}
+	}
+	.slider-handle{
+		height: 26px !important;
+		width: 26px !important;
+	}
 }
