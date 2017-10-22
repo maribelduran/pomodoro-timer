@@ -21,6 +21,10 @@ Timer.prototype.resetTime =function(minutes){
 		this.seconds = this.secondsLeft = (minutes * 60);
 		this.timeElapsed = 0;
 }
+//Returns false if the timer hasn't ran yet. True if it has already elapsed time.
+Timer.prototype.hasEllapsedTime = function(minutes){
+	return this.seconds != this.secondsLeft;
+}
 
 //model
 var model = {
@@ -63,6 +67,7 @@ var controller = {
 	startTimer: function(){
 		if (!model.activeTimer.isRunning && (model.sessionsCompleted < MAX_SESSIONS)){
 			view.displayActiveTimer(model.activeTimer.name, model.activeTimer.secondsLeft, model.activeTimer.timeElapsed);
+			if (!model.activeTimer.hasEllapsedTime()) view.playSound("kyoto_bell");
 			model.activeTimer.isRunning = true;
 			view.updateToggleIcon("start");
 			model.activeTimer.intervalID =  setInterval(function(){
@@ -261,6 +266,9 @@ var view = {
 		this.breakSlider.on("slideStop", function(sliderValue){
 			controller.updateBreakLength(sliderValue);
 		});
+  },
+  playSound: function(soundName){
+	  document.getElementById(soundName).play();
   }
 };
 
